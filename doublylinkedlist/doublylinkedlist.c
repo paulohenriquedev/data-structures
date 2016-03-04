@@ -38,13 +38,34 @@ int isEmpty(Node *first) {
 }
 
 Node* search(Node *first, int item) {
-    Node *p;
-    for (p = first; p != NULL; p = p->nextNode)
-        if (p->item == item)
-            return p;
-    return NULL;
+    if (first->item == item || first == NULL)
+        return first;
+    else
+        return search(first->nextNode, item);
 }
 
 Node *removeNode(Node *first, int item) {
+    Node *current = first;
 
+    //If the list is empty
+    if (current == NULL)
+        return first;
+ 
+    //Look for the item through the list
+    while (current != NULL && current->item != item)
+        current = current->nextNode;
+ 
+    //If the searched item ir the first of the list, we set the second element as the first
+    //Else, we change the previousNode->nextNode to point the following element
+    if (first == current)
+        first = current->nextNode;
+    else
+        current->previousNode->nextNode = current->nextNode;
+    
+    //Updating the previousNode of the following element
+    if (current->nextNode != NULL)
+        current->nextNode->previousNode = current->previousNode;
+
+    free(current);
+    return first;
 }

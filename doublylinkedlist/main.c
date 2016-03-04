@@ -20,4 +20,7 @@ void main() {
     printDoublyLinkedListBackwards(teste); 
 
     printf("Resultado da busca: %d\n", search(teste, 3)->item);
+
+    removeNode(teste, 3);
+    printDoublyLinkedListBackwards(teste); 
 }
