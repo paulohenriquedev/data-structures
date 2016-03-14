@@ -1,10 +1,13 @@
 typedef struct stack Stack;
+typedef struct node Node;
 
-#define MAX_STACK_SIZE 10
+struct node {
+    int item;
+    Node *nextNode;
+};
 
 struct stack {
-   int currentSize;
-   int items[MAX_STACK_SIZE];
+    Node *top;
 };
 
 Stack *createStack();

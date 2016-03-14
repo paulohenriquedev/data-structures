@@ -3,27 +3,19 @@
 #include "stack.h"
 
 void main(){
-    Stack* stack = createStack();
+    Stack *myStack = createStack();
 
-    printf("Empty: %d\n", isEmpty(stack));
+    printf("Is empty: %d\n", isEmpty(myStack));
 
-    printf("Tamanho atual da pilha: %d\n", stack->currentSize);
-
-    push(stack, 1);
-    push(stack, 2);
-    push(stack, 3);
-
-    printf("Empty: %d\n", isEmpty(stack));
+    push(myStack, 1);
+    push(myStack, 2);
+    push(myStack, 3);
     
-    printf("Tamanho atual da pilha: %d\n", stack->currentSize);
+    printf("Is empty: %d\n", isEmpty(myStack)); 
 
-    print(stack);
+    print(myStack);
 
-    int num = pop(stack);
-
-    printf("Número retirado: %d\n", num);
-    
-    printf("Tamanho atual da pilha: %d\n", stack->currentSize);
- 
-    print(stack);
+    printf("\n%d\n", pop(myStack));
+    printf("%d\n", peek(myStack));
+    printf("%d\n", peek(myStack));
 }
