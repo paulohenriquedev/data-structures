@@ -2,41 +2,38 @@
 #include <stdlib.h>
 #include "stack.h"
 
-//Creates a new stack with a NULL pointer as top element (empty)
+#define MAX_STACK_SIZE 10
+
 Stack *createStack(){
     Stack *stack = (Stack*) malloc(sizeof(Stack));
-    stack->top = NULL;
+    stack->currentSize = 0;
     return stack;
 }
 
 void push(Stack *stack, int item){
-    Node *newTop = (Node*) malloc(sizeof(Node));
-    newTop->item = item;
-    newTop->nextNode = stack->top;
-    stack->top = newTop;
+    if (stack->currentSize == MAX_STACK_SIZE){
+        printf("Stack overflow!");
+    } else {
+        //Push the item to the currentSize position, then increases it by 1
+        stack->items[stack->currentSize++] = item;
+    }
 }
 
 int pop(Stack *stack){
-    if (stack->top == NULL)
-        return -1;
-    Node *returnTop = (Node*) malloc(sizeof(Node));
-    int returnValue = stack->top->item;
-    stack->top = stack->top->nextNode;
-    return returnValue;
+    stack->currentSize--;
+    return stack->items[stack->currentSize];
 }
 
 int peek(Stack *stack){
-    if (stack->top == NULL)
-        return -1;
-    return stack->top->item;
+   return stack->items[stack->currentSize]; 
 }
 
 int isEmpty(Stack *stack){
-    return (stack->top == NULL);
+    return (stack->currentSize == 0);
 }
 
 void print(Stack *stack){
-    Node *n = (Node*) malloc(sizeof(Node));
-    for (n = stack->top; n != NULL; n=n->nextNode)
-        printf("%d\n",n->item);
+    int i;
+    for (i = stack->currentSize-1; i >= 0; i--)
+        printf("|%d|\n", stack->items[i]);
 }
